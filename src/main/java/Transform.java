@@ -1,12 +1,7 @@
 
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.nio.channels.NetworkChannel;
+
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,13 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -75,19 +67,6 @@ public class Transform extends HttpServlet {
 	}
 
 	private void printStyledHtml(Document xmlDoc, PrintWriter out) {
-//		Transformer transformer;
-//		try {
-//			Result output = new StreamResult(new File("/Users/acca/Desktop/output.xml"));
-//	        Source input = new DOMSource(xmlDoc);
-//			transformer = TransformerFactory.newInstance().newTransformer();
-//			transformer.transform(input, output);
-//		} catch (TransformerConfigurationException | TransformerFactoryConfigurationError e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (TransformerException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
                 
         // Create dom source for the document
         DOMSource domSource=new DOMSource(xmlDoc);
@@ -115,7 +94,7 @@ public class Transform extends HttpServlet {
 		try {
 			builder = domFactory.newDocumentBuilder();
 			ServletContext context = getServletContext();
-			doc = builder.parse(context.getRealPath("/WEB-INF/classes/ACMTrento.xml"));
+			doc = builder.parse(context.getRealPath("ACMTrento.xml"));
 		} catch (ParserConfigurationException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
