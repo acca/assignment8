@@ -1,0 +1,58 @@
+#+AUTHOR: Daniele Santoro
+#+TITLE: XSL Transformation
+#+DATE: 7/12/2015
+
+* Introduction
+  - Code and documentation are present at this link: https://github.com/acca/assignment8.
+  - Demo available here: http://PUBLIC_IP_ADDRESS:8080/assignment8
+  
+  This application demonstrates a basic transformation of an XML file using an XSL file.
+
+  I've deployed:
+  - *The Servlet*: Implements =HttpServlet= which manages the clients request efficiently using threads.
+  - *The XSL file*: This file permits to specify the styles which is used to represent XML content in the HTML page rendered by the servlet.
+  - *The JSP page*: Static HTML page containing instruction.
+
+* Implementation
+
+  Specific functionality of each class/files are described below:
+
+  - *Transform.java*: This servlet expects a =filter= parameter. It analyzes it and if present the servlet call a method which, using an /XPath/ expression transform the content of the XMl file filtering only =UNIT= tags which have =ID= starting with the =filter= and an attribute =TYPE= = =CORE=.
+
+    The new XML is then passed to an =XSLT= transformer which applies =ACMTrento.xsl= stylesheet and produces a beautiful HTML content. 
+
+    Finally this content is printer out by the servlet.
+
+  - *ACMTrento.xsl*: Stylesheet which:
+    - Colors the background of the page
+    - Print the title of each UNIT in bold
+    - Print each topics of the UNIT in a unordered-list
+
+  - *index.jsp*: Just a JSP page which give the user information on how to call the servlet using the filter.
+* Deployment
+  The repository contains a /Maven/ based project developed using Eclipse which can be deployed following the below instructions.
+** Deploy & Run
+   1) Download the repository using git:
+      #+BEGIN_EXAMPLE
+      git clone https://github.com/acca/assignment8.git
+      #+END_EXAMPLE
+   2) Move into the project main folder
+      #+BEGIN_EXAMPLE
+      cd ./assignment8
+      #+END_EXAMPLE
+   3) Build the web application
+      #+BEGIN_EXAMPLE
+      mvn install
+      #+END_EXAMPLE
+   4) Move the generated =target/assignment8.war= file into your Tomcat =webapps= folder
+      #+BEGIN_EXAMPLE
+      cp target/assignment8.war $TOMCAT_HOME/webapps
+      #+END_EXAMPLE
+   5) See results from: http://localhost:8080/assignment8
+
+** Screen-shots
+   I think that a demo is better than many screen-shots, for this reason I've deployed the application on a public tomcat server available at the following address:
+
+   http://PUBLIC_IP_ADDRESS:8080/assignment8
+
+   /(IP address will be shared only in the mail to the teacher for security reasons)/
