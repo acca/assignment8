@@ -1,0 +1,26 @@
+* Testing XSL transformation
+  Use the command line transformer available in Mac OSX.
+
+  Two XSL files:
+  1) ACMTrento-blacklist.xsl: blacklist all tags which must not be printed and apply styles to tags to print
+  2) ACMTrento-whitelist.xsl: whitelist only tags which should be printer
+
+  #+BEGIN_EXAMPLE
+  xsltproc ACMTrento-blacklist.xsl ACMTrento.xml  
+  #+END_EXAMPLE
+
+* Open questions:
+  1) How can I reach same results as done in the assignment8 using only XSL ?
+  2) How can I print only certain tags ?
+     This should hide everything except UNIT, which is more specific.
+     #+BEGIN_EXAMPLE
+     <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+     <xsl:output omit-xml-declaration="yes" indent="yes"/>
+        <xsl:template match="*">
+        </xsl:template>
+        <xsl:template match="UNIT">
+           <xsl:apply-templates/>
+        </xsl:template>
+     </xsl:stylesheet>
+     #+END_EXAMPLE
+  3) How can I have a dynamic XSL transformation (including filters like in assignment8) in a Servlet using only XSL file ? Do I have to generate XSL file programmatically based on the filter parameter ? Is that a good practice ?
